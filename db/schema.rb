@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929232118) do
+ActiveRecord::Schema.define(version: 20150929232851) do
 
   create_table "entries", force: :cascade do |t|
     t.integer  "minutes"
     t.float    "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "date"
   end
 
 end

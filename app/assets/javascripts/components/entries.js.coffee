@@ -5,12 +5,19 @@
     getDefaultProps: ->
       entries: []
 
+    addEntry: (entry) ->
+      entries = @state.entries.slice()
+      entries.push entry
+      @setState entries: entries
+
     render: ->
       React.DOM.div
         className: 'entries'
         React.DOM.h2
           className: 'title'
           'Entries'
+        React.createElement EntryForm, handleNewEntry: @addEntry
+        React.DOM.hr null
         React.DOM.table
           className: 'table table-bordered'
           React.DOM.thead null,

@@ -10,12 +10,21 @@
       entries.push entry
       @setState entries: entries
 
+    amountOwed: ->
+      amounts = @state.entries.filter (val) -> val.invoiced != true
+      amounts.reduce ((prev, curr) ->
+        prev + parseFloat(curr.amount)
+      ), 0
+
     render: ->
       React.DOM.div
         className: 'entries'
         React.DOM.h2
           className: 'title'
           'Entries'
+        React.DOM.div
+          className: 'row'
+          React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
         React.createElement EntryForm, handleNewEntry: @addEntry
         React.DOM.hr null
         React.DOM.table

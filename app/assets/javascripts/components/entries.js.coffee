@@ -16,6 +16,12 @@
         prev + parseFloat(curr.rate * (curr.minutes / 60))
       ), 0
 
+    deleteEntry: (entry) ->
+      entries = @state.entries.slice()
+      index = entries.indexOf entry
+      entries.splice index, 1
+      @replaceState entries: entries
+
     render: ->
       React.DOM.div
         className: 'entries'
@@ -36,6 +42,7 @@
               React.DOM.th null, 'Rate'
               React.DOM.th null, 'Total'
               React.DOM.th null, 'Invoiced'
+              React.DOM.th null, 'Actions'
           React.DOM.tbody null,
             for entry in @state.entries
-              React.createElement Entry, key: entry.id, entry: entry
+              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry

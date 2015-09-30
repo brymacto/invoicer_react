@@ -11,6 +11,12 @@ class EntriesController < ApplicationController
       render json: @entry.errors, status: :unprocessable_entity
     end
   end
+  def destroy
+    puts "********* Destroy entry"
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+    head :no_content
+  end
 
   private
 

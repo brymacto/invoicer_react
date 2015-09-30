@@ -25,6 +25,7 @@
               React.DOM.th null, 'Date'
               React.DOM.th null, 'Amount'
               React.DOM.th null, 'Rate'
+              React.DOM.th null, 'Invoiced'
           React.DOM.tbody null,
             for entry in @state.entries
               React.createElement Entry, key: entry.id, entry: entry

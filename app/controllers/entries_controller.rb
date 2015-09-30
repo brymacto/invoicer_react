@@ -15,6 +15,6 @@ class EntriesController < ApplicationController
   private
 
     def entry_params
-      params.require(:entry).permit(:date, :minutes, :rate)
+      params.require(:entry).permit(:date, :minutes, :rate, :invoiced)
     end
 end

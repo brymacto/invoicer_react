@@ -4,3 +4,4 @@
       React.DOM.td null, @props.entry.date
       React.DOM.td null, @props.entry.amount
       React.DOM.td null, @props.entry.rate
+      React.DOM.td null, if @props.entry.invoiced == true then 'true' else ''

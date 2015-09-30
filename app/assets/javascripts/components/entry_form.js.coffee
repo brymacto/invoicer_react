@@ -34,6 +34,15 @@
             name: 'rate'
             value: @state.rate
             onChange: @handleChange
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.input
+            type: 'checkbox'
+            className: 'form-control'
+            placeholder: 'Invoiced'
+            name: 'invoiced'
+            value: @state.invoiced
+            onChange: @handleChange
         React.DOM.button
           type: 'submit'
           className: 'btn btn-primary'

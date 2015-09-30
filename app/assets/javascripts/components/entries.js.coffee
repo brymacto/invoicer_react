@@ -13,7 +13,7 @@
     amountOwed: ->
       amounts = @state.entries.filter (val) -> val.invoiced != true
       amounts.reduce ((prev, curr) ->
-        prev + parseFloat(curr.amount)
+        prev + parseFloat(curr.rate * (curr.minutes / 60))
       ), 0
 
     render: ->
@@ -32,8 +32,9 @@
           React.DOM.thead null,
             React.DOM.tr null,
               React.DOM.th null, 'Date'
-              React.DOM.th null, 'Amount'
+              React.DOM.th null, 'Minutes'
               React.DOM.th null, 'Rate'
+              React.DOM.th null, 'Total'
               React.DOM.th null, 'Invoiced'
           React.DOM.tbody null,
             for entry in @state.entries

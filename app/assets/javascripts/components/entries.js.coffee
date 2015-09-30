@@ -6,8 +6,7 @@
       entries: []
 
     addEntry: (entry) ->
-      entries = @state.entries.slice()
-      entries.push entry
+      entries = React.addons.update(@state.entries, { $push: [entry] })
       @setState entries: entries
 
     amountOwed: ->
@@ -19,7 +18,7 @@
     deleteEntry: (entry) ->
       entries = @state.entries.slice()
       index = entries.indexOf entry
-      entries.splice index, 1
+      entries = React.addons.update(@state.entries, { $splice: [[index, 1]] })
       @replaceState entries: entries
 
     render: ->

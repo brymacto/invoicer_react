@@ -4,7 +4,6 @@ class EntriesController < ApplicationController
   end
   def create
     @entry = Entry.new(entry_params)
-
     if @entry.save
       render json: @entry
     else
@@ -12,7 +11,6 @@ class EntriesController < ApplicationController
     end
   end
   def destroy
-    puts "********* Destroy entry"
     @entry = Entry.find(params[:id])
     @entry.destroy
     head :no_content

@@ -1,6 +1,6 @@
 @TimerBox = React.createClass
   getInitialState: ->
-    {hours: @props.hours, minutes: @props.minutes, seconds: @props.seconds}
+    {hours: @props.hours, minutes: @props.minutes, seconds: @props.seconds, timerOn: @props.timerOn}
   render: ->
     React.DOM.div
       className: 'small-4 large-4 columns'
@@ -29,11 +29,39 @@
             href: '#'
             onClick: @toggleTimer
             'Start'
+  # componentDidMount: ->
+  #   @setInterval @addTime, 1000
+  #   # Call a method on the mixin
+  #   return
 
   toggleTimer: (e) ->
+    console.log "state"
+    console.log this.state.timerOn
+    this.setState({timerOn:true})
+    console.log "state"
+    console.log this.state.timerOn
     e.preventDefault()
-    this.setState({seconds: '10'})
-    console.log this
+    if this.state.timerOn == true
+      @setInterval @addTime, 1000
+    else 
+      @intervals.map clearInterval
+
+    # this.setState({seconds: '10'})
+    # this.setInterval()
+
+  addTime: ->
+    console.log 'time'
+
+  componentWillMount: ->
+    @intervals = []
+    return
+  setInterval: ->
+    @intervals.push setInterval.apply(null, arguments)
+    return
+  componentWillUnmount: ->
+    @intervals.map clearInterval
+    return
+
     # timer = undefined
     # timerOn = false
     # time = 0
@@ -45,7 +73,7 @@
     # lastTime = 0
     # startTimer = ->
     #   startTime = new Date
-    #   timer = setInterval(addTime, 1000)
+    #   this.setInterval(addTime, 1000)
     #   return
     # stopTimer = ->
     #   clearInterval timer
@@ -61,10 +89,10 @@
     #   seconds = Math.floor(time / 1000) % 60
     #   minutes = Math.floor(time / (1000 * 60)) % 60
     #   hours = Math.floor(time / (1000 * 60 * 60)) % 24
-
-    #   $('#timer-seconds').text if seconds < 10 then '0' + seconds else seconds
-    #   $('#timer-minutes').text if minutes < 10 then '0' + minutes else minutes
-    #   $('#timer-hours').text if hours < 10 then '0' + hours else hours
+    #   textSeconds = if seconds < 10 then '0' + seconds else seconds
+    #   textMinutes = if minutes < 10 then '0' + minutes else minutes
+    #   textHours =  if hours < 10 then '0' + hours else hours
+    #   this.setState({seconds: textSeconds, minutes: textMinutes, hours: textHours})
     #   return
     # $('#start_stop').click ->
     #   timerOn = !timerOn
@@ -76,6 +104,10 @@
     #     stopTimer()
     #   return
     # return
+
+
+
+
 
     # '<div class="small-4 large-4 columns">
     #   <div class="panel">

@@ -33,7 +33,7 @@
         React.createElement EntryForm, handleNewEntry: @addEntry
         React.DOM.hr null
         React.DOM.table
-          className: 'table table-bordered'
+          className: 'table table-bordered table100'
           React.DOM.thead null,
             React.DOM.tr null,
               React.DOM.th null, 'Date'

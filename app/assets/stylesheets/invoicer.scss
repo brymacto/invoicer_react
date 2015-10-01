@@ -1,3 +1,19 @@
 .table100 {
   width: 100%;
 }
+
+.timer {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3em;
+}
+
+.timer-buttons {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  a {
+    margin-right: 1em;
+  }
+}

@@ -37,11 +37,20 @@
             React.DOM.span 
               id: 'timer-seconds'
               this.state.seconds
-          React.DOM.a
-            id: 'start-stop'
-            href: '#'
-            onClick: @toggleTimer
-            this.state.buttonText
+          React.DOM.div
+            className: 'timer-buttons'
+            React.DOM.a
+              id: 'start-stop'
+              className: 'button tiny'
+              href: '#'
+              onClick: @toggleTimer
+              this.state.buttonText
+            React.DOM.a
+              id: 'reset'
+              className: 'button tiny secondary'
+              href: '#'
+              onClick: @resetTimer
+              'Reset'
 
   toggleTimer: (e) ->
     newTimerOn = !this.state.timerOn

@@ -35,19 +35,13 @@
   #   return
 
   toggleTimer: (e) ->
-    console.log "state"
-    console.log this.state.timerOn
-    this.setState({timerOn:true})
-    console.log "state"
-    console.log this.state.timerOn
+    newTimerOn = !this.state.timerOn
+    this.setState({timerOn:newTimerOn})
     e.preventDefault()
-    if this.state.timerOn == true
+    if newTimerOn == true
       @setInterval @addTime, 1000
     else 
       @intervals.map clearInterval
-
-    # this.setState({seconds: '10'})
-    # this.setInterval()
 
   addTime: ->
     console.log 'time'

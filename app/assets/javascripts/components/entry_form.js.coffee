@@ -53,7 +53,7 @@
       @setState "#{ name }": e.target.value
     handleSubmit: (e) ->
       e.preventDefault()
-      $.post '', { entry: @state }, (data) =>
+      $.post '/entries', { entry: @state }, (data) =>
         @props.handleNewEntry data
         @setState @getInitialState()
       , 'JSON'

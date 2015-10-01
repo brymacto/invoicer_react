@@ -4,15 +4,12 @@
   
   componentWillMount: ->
     @intervals = []
-    return
     
   setInterval: ->
     @intervals.push setInterval.apply(null, arguments)
-    return
   
   componentWillUnmount: ->
     @intervals.map clearInterval
-    return
   
   render: ->
     React.DOM.div
@@ -73,7 +70,6 @@
     time = this.state.lastTime + difference
     response = updateTimerText time
     this.setState(response)
-    return
 
   updateTimerText = (time) ->
       seconds = Math.floor(time / 1000) % 60
@@ -83,5 +79,4 @@
       textMinutes = if minutes < 10 then '0' + minutes else minutes
       textHours =  if hours < 10 then '0' + hours else hours
       response = {seconds: textSeconds, minutes: textMinutes, hours: textHours, time: time}
-      return response
 

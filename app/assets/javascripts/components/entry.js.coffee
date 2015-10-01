@@ -1,6 +1,5 @@
 @Entry = React.createClass
   handleDelete: (e) ->
-    alert 'delete clicked'
     e.preventDefault()
     $.ajax
       method: 'DELETE'

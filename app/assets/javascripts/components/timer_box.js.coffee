@@ -63,6 +63,10 @@
       this.setState({lastTime: this.state.time, buttonText: 'Start'})
       @intervals.map clearInterval
 
+  resetTimer: (e) ->
+    this.setState({timerOn:false,buttonText:'Start',time:0, lastTime:0, hours:'00', minutes:'00', seconds:'00'})
+    @intervals.map clearInterval
+
   addTime: ->
     currentTime = new Date
     difference = Math.floor(currentTime.getTime() - this.state.startTime.getTime())

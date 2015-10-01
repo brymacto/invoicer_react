@@ -29,6 +29,7 @@
           'Entries'
         React.DOM.div
           className: 'row'
+          React.createElement TimerBox
           React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
         React.createElement EntryForm, handleNewEntry: @addEntry
         React.DOM.hr null

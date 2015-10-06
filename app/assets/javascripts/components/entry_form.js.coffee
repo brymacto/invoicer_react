@@ -3,6 +3,7 @@
       title: ''
       date: ''
       amount: ''
+      # minutes: null
     render: ->
       React.DOM.form
         className: 'form-inline'
@@ -25,6 +26,7 @@
               className: 'form-control'
               placeholder: 'Minutes'
               name: 'minutes'
+              ref: 'minutes'
               value: @state.minutes
               onChange: @handleChange
           React.DOM.div
@@ -41,7 +43,7 @@
           React.DOM.div
             className: 'form-group columns small-12 large-4'
             React.DOM.label
-              for: 'invoiced'
+              # for: 'invoiced'
               className: 'form-label'
               'Invoiced?'
             React.DOM.input
@@ -74,6 +76,11 @@
         @props.handleNewEntry data
         @setState @getInitialState()
       , 'JSON'
+    importTimer: (e) ->
+      e.preventDefault()
+      # console.log 'clicked'
+      this.setState({minutes: '60'})
+
 
     valid: ->
       @state.date && @state.minutes && @state.rate

@@ -8,46 +8,63 @@
         className: 'form-inline'
         onSubmit: @handleSubmit
         React.DOM.div
-          className: 'form-group'
-          React.DOM.input
-            type: 'text'
-            className: 'form-control'
-            placeholder: 'Date'
-            name: 'date'
-            value: @state.date
-            onChange: @handleChange
+          className: 'row'
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.input
+              type: 'text'
+              className: 'form-control'
+              placeholder: 'Date'
+              name: 'date'
+              value: @state.date
+              onChange: @handleChange
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.input
+              type: 'number'
+              className: 'form-control'
+              placeholder: 'Minutes'
+              name: 'minutes'
+              value: @state.minutes
+              onChange: @handleChange
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.input
+              type: 'number'
+              className: 'form-control'
+              placeholder: 'Rate'
+              name: 'rate'
+              value: @state.rate
+              onChange: @handleChange
         React.DOM.div
-          className: 'form-group'
-          React.DOM.input
-            type: 'number'
-            className: 'form-control'
-            placeholder: 'Minutes'
-            name: 'minutes'
-            value: @state.minutes
-            onChange: @handleChange
-        React.DOM.div
-          className: 'form-group'
-          React.DOM.input
-            type: 'number'
-            className: 'form-control'
-            placeholder: 'Rate'
-            name: 'rate'
-            value: @state.rate
-            onChange: @handleChange
-        React.DOM.div
-          className: 'form-group'
-          React.DOM.input
-            type: 'checkbox'
-            className: 'form-control'
-            placeholder: 'Invoiced'
-            name: 'invoiced'
-            value: @state.invoiced
-            onChange: @handleChange
-        React.DOM.button
-          type: 'submit'
-          className: 'btn btn-primary'
-          disabled: !@valid()
-          'Create entry'
+          className: 'row'
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.label
+              for: 'invoiced'
+              className: 'form-label'
+              'Invoiced?'
+            React.DOM.input
+              type: 'checkbox'
+              className: 'form-control columns small-12 large-12 form-check'
+              name: 'invoiced'
+              value: @state.invoiced
+              onChange: @handleChange
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.a
+              id: 'use-time'
+              className: 'button secondary columns small-12 large-12'
+              href: '#'
+              onClick: @importTimer
+              'Import from timer'
+          React.DOM.div
+            className: 'form-group columns small-12 large-4'
+            React.DOM.button
+              type: 'submit'
+              className: 'btn btn-primary columns small-12 large-12'
+              disabled: !@valid()
+              'Create entry'
     handleChange: (e) ->
       name = e.target.name
       @setState "#{ name }": e.target.value

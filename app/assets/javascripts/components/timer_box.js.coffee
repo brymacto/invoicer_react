@@ -48,6 +48,12 @@
               href: '#'
               onClick: @resetTimer
               'Reset'
+            # React.DOM.a
+            #   id: 'use-time'
+            #   className: 'button tiny secondary'
+            #   href: '#'
+            #   onClick: @resetTimer
+            #   'Use time'
 
   toggleTimer: (e) ->
     newTimerOn = !this.state.timerOn

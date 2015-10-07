@@ -81,6 +81,7 @@
     toggleTimer: (e) ->
       newTimerOn = !this.state.timerOn
       this.setState({timerOn:newTimerOn})
+      # @setState timerOn: !@state.timerOn
       e.preventDefault()
       if newTimerOn == true
         @setInterval @incrementTime, 1000

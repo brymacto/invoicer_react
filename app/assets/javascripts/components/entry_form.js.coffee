@@ -3,7 +3,7 @@
       title: ''
       date: ''
       amount: ''
-      time: '70'
+      formTime: @props.time
       # minutes: null
     render: ->
       React.DOM.form
@@ -79,6 +79,8 @@
       , 'JSON'
     importTimer: (e) ->
       e.preventDefault()
+      minutes = Math.floor(@props.time / 1000 / 60)
+      console.log(minutes)
       # console.log 'clicked'
       # this.refs.minutes.getDOMNode().value = '60'
       # this.setState({minutes: this.refs.minutes.getDOMNode().value})

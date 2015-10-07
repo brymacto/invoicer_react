@@ -19,7 +19,7 @@
           className: 'row'
           React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.toggleTimer, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
           React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
-        React.createElement EntryForm, handleNewEntry: @addEntry
+        React.createElement EntryForm, handleNewEntry: @addEntry, time: @state.time
         React.DOM.hr null
         React.DOM.table
           className: 'table table-bordered table100'

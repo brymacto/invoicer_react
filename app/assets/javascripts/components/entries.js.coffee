@@ -1,4 +1,30 @@
-  @Entries = React.createClass
+@Entries = React.createClass
+    render: ->
+      React.DOM.div
+        className: 'entries'
+        React.DOM.h2
+          className: 'title'
+          'Entries'
+        React.DOM.div
+          className: 'row'
+          React.createElement TimerBox, hours: '00', minutes: '00', seconds: '00', timerOn: false, time: @state.time, startStopClick: this.incrementTime
+          React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
+        React.createElement EntryForm, handleNewEntry: @addEntry
+        React.DOM.hr null
+        React.DOM.table
+          className: 'table table-bordered table100'
+          React.DOM.thead null,
+            React.DOM.tr null,
+              React.DOM.th null, 'Date'
+              React.DOM.th null, 'Minutes'
+              React.DOM.th null, 'Rate'
+              React.DOM.th null, 'Total'
+              React.DOM.th null, 'Invoiced'
+              React.DOM.th null, 'Actions'
+          React.DOM.tbody null,
+            for entry in @state.entries
+              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry
+              
     getInitialState: ->
       entries: @props.data
       time: 0
@@ -51,30 +77,3 @@
       else 
         this.setState({lastTime: this.state.time, buttonText: 'Start'})
         @intervals.map clearInterval
-
-
-    render: ->
-      React.DOM.div
-        className: 'entries'
-        React.DOM.h2
-          className: 'title'
-          'Entries'
-        React.DOM.div
-          className: 'row'
-          React.createElement TimerBox, hours: '00', minutes: '00', seconds: '00', timerOn: false, time: @state.time, startStopClick: this.incrementTime
-          React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
-        React.createElement EntryForm, handleNewEntry: @addEntry
-        React.DOM.hr null
-        React.DOM.table
-          className: 'table table-bordered table100'
-          React.DOM.thead null,
-            React.DOM.tr null,
-              React.DOM.th null, 'Date'
-              React.DOM.th null, 'Minutes'
-              React.DOM.th null, 'Rate'
-              React.DOM.th null, 'Total'
-              React.DOM.th null, 'Invoiced'
-              React.DOM.th null, 'Actions'
-          React.DOM.tbody null,
-            for entry in @state.entries
-              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry

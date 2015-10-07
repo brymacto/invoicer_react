@@ -33,7 +33,12 @@
               React.DOM.th null, 'Actions'
           React.DOM.tbody null,
             for entry in @state.entries
-              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry
+              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry, handleEditEntry: @updateEntry
+    updateEntry: (entry, data) ->
+      index = @state.entries.indexOf entry
+      entries = React.addons.update(@state.entries, { $splice: [[index, 1, data]] })
+      @replaceState entries: entries
+
     componentWillMount: ->
       @intervals = []
       

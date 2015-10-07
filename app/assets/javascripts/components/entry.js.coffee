@@ -1,6 +1,7 @@
 @Entry = React.createClass
   getInitialState: ->
     edit: false
+    invoiced: @props.entry.invoiced
   handleDelete: (e) ->
     e.preventDefault()
     $.ajax
@@ -12,6 +13,22 @@
   handleToggle: (e) ->
     e.preventDefault()
     @setState edit: !@state.edit
+  handleEdit: (e) ->
+      e.preventDefault()
+      data =
+        date: React.findDOMNode(@refs.date).value
+        minutes: React.findDOMNode(@refs.minutes).value
+        rate: React.findDOMNode(@refs.rate).value
+        invoiced: React.findDOMNode(@refs.invoiced).checked
+      $.ajax
+        method: 'PUT'
+        url: "/entries/#{ @props.entry.id }"
+        dataType: 'JSON'
+        data:
+          entry: data
+        success: (data) =>
+          @setState edit: false
+          @props.handleEditEntry @props.entry, data
 
   render: ->
     if @state.edit
@@ -61,7 +78,9 @@
         React.DOM.input
           className: 'form-control'
           type: 'checkbox'
-          checked: @props.entry.invoiced
+          initialChecked: @state.invoiced || @props.entry.invoiced
+          # onChange: this.onChange
+          defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null,
         React.DOM.a

@@ -46,7 +46,8 @@
               id: 'reset'
               className: 'button tiny secondary'
               href: '#'
-              onClick: @resetTimer
+              onClick: @props.resetClick
+              # onClick: @resetTimer
               'Reset'
             # React.DOM.a
             #   id: 'use-time'

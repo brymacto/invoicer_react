@@ -17,7 +17,7 @@
           'Entries'
         React.DOM.div
           className: 'row'
-          React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.toggleTimer, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
+          React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.toggleTimer, resetClick: this.resetTimer, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
           React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
         React.createElement EntryForm, handleNewEntry: @addEntry, time: @state.time
         React.DOM.hr null
@@ -88,3 +88,6 @@
       else 
         this.setState({lastTime: this.state.time, timerText: 'Start'})
         @intervals.map clearInterval
+    resetTimer: (e) ->
+      this.setState({timerOn:false,timerText:'Start',time:0, lastTime:0, hours:'00', minutes:'00', seconds:'00'})
+      @intervals.map clearInterval

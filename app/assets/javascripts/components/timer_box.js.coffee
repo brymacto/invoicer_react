@@ -1,6 +1,6 @@
 @TimerBox = React.createClass
   getInitialState: ->
-    {hours: @props.hours, minutes: @props.minutes, seconds: @props.seconds, timerOn: @props.timerOn, startTime: new Date, time: 0, lastTime: 0, buttonText: 'Start'}
+    {hours: @props.hours, minutes: @props.minutes, seconds: @props.seconds, timerOn: @props.timerOn, startTime: new Date, time: @props.time, lastTime: 0, buttonText: 'Start'}
   
   componentWillMount: ->
     @intervals = []
@@ -40,7 +40,7 @@
               id: 'start-stop'
               className: 'button tiny'
               href: '#'
-              onClick: @toggleTimer
+              onClick: @props.startStopClick
               this.state.buttonText
             React.DOM.a
               id: 'reset'

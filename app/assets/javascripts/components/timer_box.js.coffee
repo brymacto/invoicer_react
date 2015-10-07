@@ -41,7 +41,7 @@
               className: 'button tiny'
               href: '#'
               onClick: @props.startStopClick
-              this.state.buttonText
+              @props.buttonText
             React.DOM.a
               id: 'reset'
               className: 'button tiny secondary'

@@ -2,13 +2,13 @@
     getInitialState: ->
       entries: @props.data
       time: 0
-      timerOn: @props.timerOn
+      timerOn: false
       startTime: new Date
       timerText: 'Start'
       lastTime: 0
-      hours: '01'
-      minutes: '01'
-      seconds: '01'
+      hours: '00'
+      minutes: '00'
+      seconds: '00'
     render: ->
       React.DOM.div
         className: 'entries'
@@ -17,7 +17,7 @@
           'Entries'
         React.DOM.div
           className: 'row'
-          React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.incrementTime, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
+          React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.toggleTimer, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
           React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
         React.createElement EntryForm, handleNewEntry: @addEntry
         React.DOM.hr null
@@ -34,7 +34,14 @@
           React.DOM.tbody null,
             for entry in @state.entries
               React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry
-
+    componentWillMount: ->
+      @intervals = []
+      
+    setInterval: ->
+      @intervals.push setInterval.apply(null, arguments)
+    
+    componentWillUnmount: ->
+      @intervals.map clearInterval
 
     getDefaultProps: ->
       entries: []
@@ -65,7 +72,6 @@
       response = {seconds: textSeconds, minutes: textMinutes, hours: textHours, time: time}
 
     incrementTime: ->
-      console.log 'increment time method'
       currentTime = new Date
       difference = Math.floor(currentTime.getTime() - this.state.startTime.getTime())
       time = this.state.lastTime + difference

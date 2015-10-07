@@ -1,4 +1,14 @@
 @Entries = React.createClass
+    getInitialState: ->
+      entries: @props.data
+      time: 0
+      timerOn: @props.timerOn
+      startTime: new Date
+      timerText: 'Start'
+      lastTime: 0
+      hours: '01'
+      minutes: '01'
+      seconds: '01'
     render: ->
       React.DOM.div
         className: 'entries'
@@ -7,7 +17,7 @@
           'Entries'
         React.DOM.div
           className: 'row'
-          React.createElement TimerBox, hours: '00', minutes: '00', seconds: '00', timerOn: false, time: @state.time, startStopClick: this.incrementTime
+          React.createElement TimerBox, hours: @state.hours, minutes: @state.minutes, seconds: @state.seconds, timerOn: false, time: @state.time, startStopClick: this.incrementTime, startTime: new Date, lastTime: @state.lastTime, buttonText: @state.timerText
           React.createElement AmountBox, type: 'info', amount: @amountOwed(), text: 'Amount Owed'
         React.createElement EntryForm, handleNewEntry: @addEntry
         React.DOM.hr null
@@ -24,13 +34,7 @@
           React.DOM.tbody null,
             for entry in @state.entries
               React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry
-              
-    getInitialState: ->
-      entries: @props.data
-      time: 0
-      timerOn: @props.timerOn
-      startTime: new Date
-      buttonText: 'Start'
+
 
     getDefaultProps: ->
       entries: []
@@ -51,7 +55,7 @@
       entries = React.addons.update(@state.entries, { $splice: [[index, 1]] })
       @replaceState entries: entries
 
-    updateTimerText = (time) ->
+    updateTimerText: (time) ->
       seconds = Math.floor(time / 1000) % 60
       minutes = Math.floor(time / (1000 * 60)) % 60
       hours = Math.floor(time / (1000 * 60 * 60)) % 24
@@ -61,10 +65,11 @@
       response = {seconds: textSeconds, minutes: textMinutes, hours: textHours, time: time}
 
     incrementTime: ->
+      console.log 'increment time method'
       currentTime = new Date
       difference = Math.floor(currentTime.getTime() - this.state.startTime.getTime())
       time = this.state.lastTime + difference
-      response = updateTimerText time
+      response = this.updateTimerText time
       this.setState(response)
 
     toggleTimer: (e) ->
@@ -73,7 +78,7 @@
       e.preventDefault()
       if newTimerOn == true
         @setInterval @incrementTime, 1000
-        this.setState({startTime: new Date, buttonText: 'Stop'})
+        this.setState({startTime: new Date, timerText: 'Stop'})
       else 
-        this.setState({lastTime: this.state.time, buttonText: 'Start'})
+        this.setState({lastTime: this.state.time, timerText: 'Start'})
         @intervals.map clearInterval

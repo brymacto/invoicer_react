@@ -58,7 +58,11 @@
           ref: 'rate'
       React.DOM.td null, @props.entry.rate * (@props.entry.minutes / 60)
       React.DOM.td null,
-        'Invoiced'
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          checked: @props.entry.invoiced
+          ref: 'invoiced'
       React.DOM.td null,
         React.DOM.a
           className: 'button success tiny form-button'

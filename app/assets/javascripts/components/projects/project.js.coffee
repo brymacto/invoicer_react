@@ -3,7 +3,7 @@
     e.preventDefault()
     $.ajax
       method: 'DELETE'
-      url: "/entries/#{ @props.project.id }"
+      url: "/projects/#{ @props.project.id }"
       dataType: 'JSON'
       success: () =>
         @props.handleDeleteProject @props.project

@@ -32,4 +32,4 @@
       , 'JSON'
 
     valid: ->
-      @state.date && @state.minutes && @state.rate
+      @state.name

@@ -13,6 +13,7 @@ var Menu = React.createClass({
             <ul className="left">
               <li><a href="/">Time Entries</a></li>
               <li><a href="/projects/">Projects</a></li>
+              <li><a href="/tasks/">Tasks</a></li>
             </ul>
           </section>
         </nav>

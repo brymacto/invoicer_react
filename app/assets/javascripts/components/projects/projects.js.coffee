@@ -31,14 +31,4 @@
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for project in @state.projects
-            React.createElement Project, key: project.id, project: project, handleDeleteProject: @deleteProject, handleEditEntry: @updateProject
-
-  addProject: (project) ->
-    projects = React.addons.update(@state.projects, { $push: [project] })
-    @setState projects: projects
-  
-  deleteProject: (project) ->
-    projects = @state.projects.slice()
-    index = projects.indexOf project
-    projects = React.addons.update(@state.projects, { $splice: [[index, 1]] })
-    @replaceState projects: projects
+            React.createElement Project, key: project.id, project: project, handleDeleteProject: @deleteProject, handleEditProject: @updateProject

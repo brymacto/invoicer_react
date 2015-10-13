@@ -16,7 +16,6 @@ options: [
       notes: ''
       project_id: null
       task_id: null
-
     render: ->
       React.DOM.form
         className: 'form-inline'
@@ -25,14 +24,16 @@ options: [
           className: 'row'
           React.DOM.div
             className: 'form-group columns small-12 large-6'
-            React.DOM.select
-              type: 'select'
-              className: 'form-control'
-              name: 'project'
-              options: [React.addons.createFragment({ value: 'one', label: 'One' }),React.addons.createFragment({ value: 'two', label: 'Two' })]
-              value: @state.project_id
-              onChange: @logChange
-              # [React.addons.createFragment({ value: 'one', label: 'One' }),React.addons.createFragment({ value: 'two', label: 'Two' })]
+            React.createElement SelectBox
+            # React.DOM.select
+            #   type: 'select'
+            #   className: 'form-control'
+            #   name: 'project'
+            #   options: [{ value: 'one', label: 'One' },{ value: 'two', label: 'Two' }]
+            #   value: 'one'
+            #   onChange: @logChange
+            #   disabled: false
+            #   searchable: true
         React.DOM.div
           className: 'row'
           React.DOM.div

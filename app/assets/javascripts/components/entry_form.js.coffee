@@ -43,6 +43,18 @@
               onChange: @handleChange
         React.DOM.div
           className: 'row'
+          
+          React.DOM.div
+            className: 'form-group columns small-12 large-12'
+            React.DOM.textarea
+              type: 'text'
+              className: 'form-control'
+              placeholder: 'Notes'
+              name: 'notes'
+              value: @state.notes
+              onChange: @handleChange
+        React.DOM.div
+          className: 'row'
           React.DOM.div
             className: 'form-group columns small-4 large-4'
             React.DOM.label
@@ -55,17 +67,6 @@
               name: 'invoiced'
               value: @state.invoiced
               onChange: @handleChange
-          React.DOM.div
-            className: 'form-group columns small-8 large-8'
-            React.DOM.input
-              type: 'text'
-              className: 'form-control'
-              placeholder: 'Notes'
-              name: 'notes'
-              value: @state.notes
-              onChange: @handleChange
-        React.DOM.div
-          className: 'row'
           React.DOM.div
             className: 'form-group columns small-4 large-4'
             React.DOM.a

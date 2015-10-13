@@ -5,6 +5,8 @@
       amount: ''
       formTime: @props.time
       minutes: null
+      rate: ''
+      notes: ''
     render: ->
       React.DOM.form
         className: 'form-inline'
@@ -16,7 +18,7 @@
             React.DOM.input
               type: 'text'
               className: 'form-control'
-              placeholder: 'Date'
+              placeholder: 'Date*'
               name: 'date'
               value: @state.date
               onChange: @handleChange
@@ -25,7 +27,7 @@
             React.DOM.input
               type: 'number'
               className: 'form-control'
-              placeholder: 'Minutes'
+              placeholder: 'Minutes*'
               name: 'minutes'
               ref: 'minutes'
               value: @state.minutes
@@ -35,7 +37,7 @@
             React.DOM.input
               type: 'number'
               className: 'form-control'
-              placeholder: 'Rate'
+              placeholder: 'Rate*'
               name: 'rate'
               value: @state.rate
               onChange: @handleChange
@@ -53,6 +55,17 @@
               name: 'invoiced'
               value: @state.invoiced
               onChange: @handleChange
+          React.DOM.div
+            className: 'form-group columns small-8 large-8'
+            React.DOM.input
+              type: 'text'
+              className: 'form-control'
+              placeholder: 'Notes'
+              name: 'notes'
+              value: @state.notes
+              onChange: @handleChange
+        React.DOM.div
+          className: 'row'
           React.DOM.div
             className: 'form-group columns small-4 large-4'
             React.DOM.a

@@ -43,6 +43,7 @@
       React.DOM.td null, amountFormat(@props.entry.rate)
       React.DOM.td null, amountFormat(@props.entry.rate * (@props.entry.minutes / 60))
       React.DOM.td null, if @props.entry.invoiced == true then 'true' else ''
+      React.DOM.td null, @props.entry.notes
       React.DOM.td null,
         React.DOM.a
           className: 'button tiny form-button'
@@ -82,6 +83,12 @@
           # onChange: this.onChange
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
+      React.DOM.td null,
+        React.DOM.input
+            className: 'form-control'
+            type: 'text'
+            defaultValue: @props.entry.notes
+            ref: 'notes'
       React.DOM.td null,
         React.DOM.a
           className: 'button success tiny form-button'

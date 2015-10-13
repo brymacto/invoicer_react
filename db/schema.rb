@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013190057) do
+ActiveRecord::Schema.define(version: 20151013201535) do
 
   create_table "entries", force: :cascade do |t|
     t.integer  "minutes"
@@ -21,7 +21,12 @@ ActiveRecord::Schema.define(version: 20151013190057) do
     t.date     "date"
     t.boolean  "invoiced",   default: false
     t.text     "notes"
+    t.integer  "project_id"
+    t.integer  "task_id"
   end
+
+  add_index "entries", ["project_id"], name: "index_entries_on_project_id"
+  add_index "entries", ["task_id"], name: "index_entries_on_task_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"

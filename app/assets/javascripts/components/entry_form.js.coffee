@@ -1,3 +1,10 @@
+options: [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' }
+    ]
+
+
+
 @EntryForm = React.createClass
     getInitialState: ->
       title: ''
@@ -7,10 +14,25 @@
       minutes: null
       rate: ''
       notes: ''
+      project_id: null
+      task_id: null
+
     render: ->
       React.DOM.form
         className: 'form-inline'
         onSubmit: @handleSubmit
+        React.DOM.div
+          className: 'row'
+          React.DOM.div
+            className: 'form-group columns small-12 large-6'
+            React.DOM.select
+              type: 'select'
+              className: 'form-control'
+              name: 'project'
+              options: [React.addons.createFragment({ value: 'one', label: 'One' }),React.addons.createFragment({ value: 'two', label: 'Two' })]
+              value: @state.project_id
+              onChange: @logChange
+              # [React.addons.createFragment({ value: 'one', label: 'One' }),React.addons.createFragment({ value: 'two', label: 'Two' })]
         React.DOM.div
           className: 'row'
           React.DOM.div
@@ -43,7 +65,6 @@
               onChange: @handleChange
         React.DOM.div
           className: 'row'
-          
           React.DOM.div
             className: 'form-group columns small-12 large-12'
             React.DOM.textarea
@@ -85,6 +106,8 @@
     handleChange: (e) ->
       name = e.target.name
       @setState "#{ name }": e.target.value
+    logChange: (val) ->
+      console.log 'selected: ' + val
     handleSubmit: (e) ->
       e.preventDefault()
       $.post '/entries', { entry: @state }, (data) =>
@@ -100,7 +123,5 @@
       # this.refs.minutes.getDOMNode().value = '60'
       # this.setState({minutes: this.refs.minutes.getDOMNode().value})
       # this.setState({minutes: this.state.time})
-
-
     valid: ->
       @state.date && @state.minutes && @state.rate

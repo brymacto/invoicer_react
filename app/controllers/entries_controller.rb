@@ -28,6 +28,6 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:date, :minutes, :rate, :invoiced, :notes)
+    params.require(:entry).permit(:date, :minutes, :rate, :invoiced, :notes, :project_id, :task_id)
   end
 end

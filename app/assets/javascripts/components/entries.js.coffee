@@ -1,6 +1,7 @@
 @Entries = React.createClass
     getInitialState: ->
       entries: @props.data
+      projects: @props.projects
       time: 0
       timerOn: false
       startTime: new Date

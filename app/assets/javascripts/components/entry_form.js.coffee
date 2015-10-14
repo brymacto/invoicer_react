@@ -24,7 +24,7 @@ options: [
           className: 'row'
           React.DOM.div
             className: 'form-group columns small-12 large-4'
-            React.createElement SelectBox
+            React.createElement SelectBox, options: [{value: 'a', label: 'apple'}, {value: 'b', label: 'banana'}]
             # React.DOM.select
             #   type: 'select'
             #   className: 'form-control'

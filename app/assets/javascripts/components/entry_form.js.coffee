@@ -23,7 +23,7 @@ options: [
         React.DOM.div
           className: 'row'
           React.DOM.div
-            className: 'form-group columns small-12 large-6'
+            className: 'form-group columns small-12 large-4'
             React.createElement SelectBox
             # React.DOM.select
             #   type: 'select'

@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-react-select'
+  # gem 'rails-assets-react-select'
   # gem 'rails-assets-react-dom'
 end
 # Use ActiveModel has_secure_password

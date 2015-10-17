@@ -28,7 +28,7 @@ options: [
           className: 'row'
           React.DOM.div
             className: 'form-group columns small-12 large-4'
-            React.createElement SelectBox, options: getSelectOptions(@props.projects)
+            React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange
             # React.DOM.select
             #   type: 'select'
             #   className: 'form-control'

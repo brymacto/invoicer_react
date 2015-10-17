@@ -22,6 +22,7 @@ var SelectBox = React.createClass({
   },
   handleChange: function(e) {
       console.log('select changed');
+      this.props.onChange(e);
   }
   
 });

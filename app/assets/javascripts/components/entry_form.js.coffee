@@ -130,8 +130,9 @@ options: [
       # this.setState({minutes: this.state.time})
     valid: ->
       @state.date && @state.minutes && @state.rate
-    getSelectOptions = (projects) ->
+    getSelectOptions = (projects1) ->
       select_projects = []
-      $.each projects, (project) ->
+      $.each projects1, (project) ->
         select_projects.push {value: project.id, label: project.name}
+        return null
       return select_projects

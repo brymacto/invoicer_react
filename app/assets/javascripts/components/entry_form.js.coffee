@@ -132,7 +132,7 @@ options: [
       @state.date && @state.minutes && @state.rate
     getSelectOptions = (projects1) ->
       select_projects = []
-      $.each projects1, (project) ->
+      $.each projects1, (index, project) ->
         select_projects.push {value: project.id, label: project.name}
         return null
       return select_projects

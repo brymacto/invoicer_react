@@ -3,7 +3,7 @@ options: [
     { value: 'two', label: 'Two' }
     ]
 
-
+# select_projects: []
 
 @EntryForm = React.createClass
     getInitialState: ->
@@ -16,6 +16,10 @@ options: [
       notes: ''
       project_id: null
       task_id: null
+      
+      # $.each @props.projects, (project) ->
+      #   select_projects.push {value: project.id, label: project.name}
+      #   return true
     render: ->
       React.DOM.form
         className: 'form-inline'
@@ -24,7 +28,7 @@ options: [
           className: 'row'
           React.DOM.div
             className: 'form-group columns small-12 large-4'
-            React.createElement SelectBox, options: [{value: 'a', label: 'apple'}, {value: 'b', label: 'banana'}]
+            React.createElement SelectBox, options: getSelectOptions(@props.projects)
             # React.DOM.select
             #   type: 'select'
             #   className: 'form-control'
@@ -126,3 +130,8 @@ options: [
       # this.setState({minutes: this.state.time})
     valid: ->
       @state.date && @state.minutes && @state.rate
+    getSelectOptions = (projects) ->
+      select_projects = []
+      $.each projects, (project) ->
+        select_projects.push {value: project.id, label: project.name}
+      return select_projects

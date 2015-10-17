@@ -2,9 +2,6 @@ function logChange(val) {
   console.log("Selected: " + val);
 }
 
-
-
-
 var SelectBox = React.createClass({
   render: function() {
     var options = this.props.options
@@ -21,8 +18,7 @@ var SelectBox = React.createClass({
       );
   },
   handleChange: function(e) {
-      console.log('select changed');
       this.props.onChange(e);
   }
-  
+
 });

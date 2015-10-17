@@ -1,10 +1,3 @@
-options: [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' }
-    ]
-
-# select_projects: []
-
 @EntryForm = React.createClass
     getInitialState: ->
       title: ''
@@ -17,9 +10,6 @@ options: [
       project_id: null
       task_id: null
       
-      # $.each @props.projects, (project) ->
-      #   select_projects.push {value: project.id, label: project.name}
-      #   return true
     render: ->
       React.DOM.form
         className: 'form-inline'
@@ -29,15 +19,6 @@ options: [
           React.DOM.div
             className: 'form-group columns small-12 large-4'
             React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange
-            # React.DOM.select
-            #   type: 'select'
-            #   className: 'form-control'
-            #   name: 'project'
-            #   options: [{ value: 'one', label: 'One' },{ value: 'two', label: 'Two' }]
-            #   value: 'one'
-            #   onChange: @logChange
-            #   disabled: false
-            #   searchable: true
         React.DOM.div
           className: 'row'
           React.DOM.div
@@ -123,11 +104,6 @@ options: [
       e.preventDefault()
       minutes = Math.floor(@props.time / 1000 / 60)
       this.setState({minutes: minutes})
-      # console.log(minutes)
-      # console.log 'clicked'
-      # this.refs.minutes.getDOMNode().value = '60'
-      # this.setState({minutes: this.refs.minutes.getDOMNode().value})
-      # this.setState({minutes: this.state.time})
     valid: ->
       @state.date && @state.minutes && @state.rate
     getSelectOptions = (projects1) ->

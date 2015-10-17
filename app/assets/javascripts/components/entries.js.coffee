@@ -31,6 +31,7 @@
               React.DOM.th null, 'Rate'
               React.DOM.th null, 'Total'
               React.DOM.th null, 'Invoiced'
+              React.DOM.th null, 'Project'
               React.DOM.th null, 'Notes'
               React.DOM.th null, 'Actions'
           React.DOM.tbody null,

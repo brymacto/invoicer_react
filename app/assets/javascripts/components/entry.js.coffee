@@ -6,6 +6,8 @@
     project_id: null
   componentDidMount: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
+  componentDidUpdate: ->
+    @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
     $.ajax
       url: '/' + model + '/' + id
@@ -39,6 +41,7 @@
         date: React.findDOMNode(@refs.date).value
         minutes: React.findDOMNode(@refs.minutes).value
         rate: React.findDOMNode(@refs.rate).value
+        notes: React.findDOMNode(@refs.notes).value
         invoiced: React.findDOMNode(@refs.invoiced).checked
         project_id: parseInt(React.findDOMNode(@refs.projects_options_edit).value, 10)
       $.ajax

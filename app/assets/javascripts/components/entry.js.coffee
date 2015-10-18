@@ -2,6 +2,24 @@
   getInitialState: ->
     edit: false
     invoiced: @props.entry.invoiced
+    projectName: ''
+  componentDidMount: ->
+    @_fetchProjectName({}, 'projects', @props.entry.project_id)
+  _fetchProjectName: (data, model, id)->
+    $.ajax
+      url: '/' + model + '/' + id
+      dataType: 'json'
+      format: 'json'
+      data: data
+    .done @_fetchDataDone
+    .fail @_fetchDataFail
+  _fetchDataDone: (data, textStatus, jqXHR) ->
+    @setState
+      projectName: data.name
+  _fetchDataFail: (xhr, status, err) =>
+    console.error '', status, err.toString()
+    @setState
+      projectName: 'Project no longer exists'
   handleDelete: (e) ->
     e.preventDefault()
     $.ajax
@@ -43,8 +61,7 @@
       React.DOM.td null, amountFormat(@props.entry.rate)
       React.DOM.td null, amountFormat(@props.entry.rate * (@props.entry.minutes / 60))
       React.DOM.td null, if @props.entry.invoiced == true then 'true' else ''
-      # React.DOM.td null, @props.entry.project_id
-      React.DOM.td null, getJsonName('projects', 4)
+      React.DOM.td null, @state.projectName
       React.DOM.td null, truncString(@props.entry.notes)
       React.DOM.td null,
         React.DOM.a
@@ -82,7 +99,6 @@
           className: 'form-control'
           type: 'checkbox'
           initialChecked: @state.invoiced || @props.entry.invoiced
-          # onChange: this.onChange
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null, # Project form here
@@ -101,7 +117,4 @@
           className: 'button alert tiny form-button'
           onClick: @handleToggle
           'Cancel'
-  getJsonName = (model, id) ->
-    callback = (response) ->
-      return response.name
-    $.get '/' + model + '/' + id, {id}, callback, 'json'
+

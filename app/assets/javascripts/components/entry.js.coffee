@@ -43,7 +43,8 @@
       React.DOM.td null, amountFormat(@props.entry.rate)
       React.DOM.td null, amountFormat(@props.entry.rate * (@props.entry.minutes / 60))
       React.DOM.td null, if @props.entry.invoiced == true then 'true' else ''
-      React.DOM.td null, @props.entry.project_id
+      # React.DOM.td null, @props.entry.project_id
+      React.DOM.td null, getJsonName('projects', 4)
       React.DOM.td null, truncString(@props.entry.notes)
       React.DOM.td null,
         React.DOM.a
@@ -100,3 +101,7 @@
           className: 'button alert tiny form-button'
           onClick: @handleToggle
           'Cancel'
+  getJsonName = (model, id) ->
+    callback = (response) ->
+      return response.name
+    $.get '/' + model + '/' + id, {id}, callback, 'json'

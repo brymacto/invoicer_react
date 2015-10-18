@@ -26,7 +26,7 @@
       @setState "#{ name }": e.target.value
     handleSubmit: (e) ->
       e.preventDefault()
-      $.post '', { project: @state }, (data) =>
+      $.post '/projects', { project: @state }, (data) =>
         @props.handleNewProject data
         @setState @getInitialState()
       , 'JSON'

@@ -11,6 +11,7 @@
 
   render: ->
     React.DOM.tr null,
+      React.DOM.td null, @props.project.id
       React.DOM.td null, @props.project.name
       React.DOM.td null,
         React.DOM.a

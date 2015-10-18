@@ -27,6 +27,7 @@
         className: 'table table-bordered table100'
         React.DOM.thead null,
           React.DOM.tr null,
+            React.DOM.th null, 'ID'
             React.DOM.th null, 'Name'
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,

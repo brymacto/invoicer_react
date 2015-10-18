@@ -3,6 +3,7 @@
     edit: false
     invoiced: @props.entry.invoiced
     projectName: ''
+    project_id: null
   componentDidMount: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
@@ -16,6 +17,7 @@
   _fetchDataDone: (data, textStatus, jqXHR) ->
     @setState
       projectName: data.name
+      project_id: @props.entry.project_id
   _fetchDataFail: (xhr, status, err) ->
     @setState
       projectName: '*deleted project'
@@ -38,7 +40,7 @@
         minutes: React.findDOMNode(@refs.minutes).value
         rate: React.findDOMNode(@refs.rate).value
         invoiced: React.findDOMNode(@refs.invoiced).checked
-        project_id: React.findDOMNode(@refs.projects_options_edit).value
+        project_id: parseInt(React.findDOMNode(@refs.projects_options_edit).value, 10)
       $.ajax
         method: 'PUT'
         url: "/entries/#{ @props.entry.id }"

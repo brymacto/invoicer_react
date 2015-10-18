@@ -38,6 +38,7 @@
         minutes: React.findDOMNode(@refs.minutes).value
         rate: React.findDOMNode(@refs.rate).value
         invoiced: React.findDOMNode(@refs.invoiced).checked
+        project_id: React.findDOMNode(@refs.projects_options_edit).value
       $.ajax
         method: 'PUT'
         url: "/entries/#{ @props.entry.id }"
@@ -47,7 +48,8 @@
         success: (data) =>
           @setState edit: false
           @props.handleEditEntry @props.entry, data
-
+  handleChange: (e) ->
+    # console.log(e)
   render: ->
     if @state.edit
       @entryForm()
@@ -101,7 +103,9 @@
           initialChecked: @state.invoiced || @props.entry.invoiced
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
-      React.DOM.td null, # Project form here
+      React.DOM.td null, 
+        'project'
+        React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange, ref: 'projects_options_edit'
       React.DOM.td null,
         React.DOM.textarea
             className: 'form-control'
@@ -117,4 +121,11 @@
           className: 'button alert tiny form-button'
           onClick: @handleToggle
           'Cancel'
+
+  getSelectOptions = (projects) ->
+    select_projects = []
+    $.each projects, (index, project) ->
+      select_projects.push {value: project.id, label: project.name}
+      return null
+    return select_projects
 

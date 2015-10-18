@@ -18,7 +18,7 @@
           className: 'row'
           React.DOM.div
             className: 'form-group columns small-12 large-4'
-            React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange
+            React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange, ref: 'projects_options'
         React.DOM.div
           className: 'row'
           React.DOM.div
@@ -106,9 +106,9 @@
       this.setState({minutes: minutes})
     valid: ->
       @state.date && @state.minutes && @state.rate
-    getSelectOptions = (projects1) ->
+    getSelectOptions = (projects) ->
       select_projects = []
-      $.each projects1, (index, project) ->
+      $.each projects, (index, project) ->
         select_projects.push {value: project.id, label: project.name}
         return null
       return select_projects

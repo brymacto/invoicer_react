@@ -3,7 +3,7 @@
     edit: false
     invoiced: @props.entry.invoiced
     projectName: ''
-    project_id: null
+    project_id: @props.entry.project_id
     projects: @props.projects
     project_fail: false
   componentDidMount: ->
@@ -11,7 +11,7 @@
   componentDidUpdate: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
-    if @state.project_fail != true
+    if (@state.project_fail != true) && ((@state.project_id != null) && (@state.project_id != ''))
       $.ajax
         url: '/' + model + '/' + id
         dataType: 'json'
@@ -22,7 +22,7 @@
   _fetchDataDone: (data, textStatus, jqXHR) ->
     @setState
       projectName: data.name
-      project_id: @props.entry.project_id
+      # project_id: @props.entry.project_id
   _fetchDataFail: (xhr, status, err) ->
     @setState
       projectName: '*deleted project'

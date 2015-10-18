@@ -16,10 +16,10 @@
   _fetchDataDone: (data, textStatus, jqXHR) ->
     @setState
       projectName: data.name
-  _fetchDataFail: (xhr, status, err) =>
-    console.error '', status, err.toString()
+  _fetchDataFail: (xhr, status, err) ->
     @setState
-      projectName: 'Project no longer exists'
+      projectName: '*deleted project'
+    console.error '', status, err.toString()
   handleDelete: (e) ->
     e.preventDefault()
     $.ajax

@@ -12,7 +12,7 @@ var SelectBox = React.createClass({
     }
 
     return (
-      <select defaultValue="B" name="project_id" onChange={this.handleChange} ref={this.props.ref}>
+      <select defaultValue={this.props.defaultValue} name="project_id" onChange={this.handleChange} ref={this.props.ref}>
       {selectOptions}
       </select>
       );

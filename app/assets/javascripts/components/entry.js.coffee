@@ -5,18 +5,20 @@
     projectName: ''
     project_id: null
     projects: @props.projects
+    project_fail: false
   componentDidMount: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   componentDidUpdate: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
-    $.ajax
-      url: '/' + model + '/' + id
-      dataType: 'json'
-      format: 'json'
-      data: data
-    .done @_fetchDataDone
-    .fail @_fetchDataFail
+    if @state.project_fail != true
+      $.ajax
+        url: '/' + model + '/' + id
+        dataType: 'json'
+        format: 'json'
+        data: data
+      .done @_fetchDataDone
+      .fail @_fetchDataFail
   _fetchDataDone: (data, textStatus, jqXHR) ->
     @setState
       projectName: data.name
@@ -24,6 +26,7 @@
   _fetchDataFail: (xhr, status, err) ->
     @setState
       projectName: '*deleted project'
+      project_fail: true
     console.error '', status, err.toString()
   handleDelete: (e) ->
     e.preventDefault()
@@ -110,7 +113,7 @@
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null, 
-        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit'
+        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit', defaultValue: @state.project_id
       React.DOM.td null,
         React.DOM.textarea
             className: 'form-control'

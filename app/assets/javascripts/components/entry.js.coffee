@@ -4,6 +4,7 @@
     invoiced: @props.entry.invoiced
     projectName: ''
     project_id: null
+    projects: @props.projects
   componentDidMount: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   componentDidUpdate: ->
@@ -109,8 +110,7 @@
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null, 
-        'project'
-        React.createElement SelectBox, options: getSelectOptions(@props.projects), onChange: @handleChange, ref: 'projects_options_edit'
+        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit'
       React.DOM.td null,
         React.DOM.textarea
             className: 'form-control'

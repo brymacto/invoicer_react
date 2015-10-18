@@ -27,6 +27,14 @@ class ProjectsController < ApplicationController
       head :no_content
     end
 
+    def show
+    @project = Project.find(params[:id])
+    respond_to do |format|
+      # format.html # index.html.erb
+      format.json { render json: @project}
+    end
+    end
+
     private
 
     def project_params

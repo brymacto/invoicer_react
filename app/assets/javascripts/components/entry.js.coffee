@@ -47,7 +47,8 @@
         rate: React.findDOMNode(@refs.rate).value
         notes: React.findDOMNode(@refs.notes).value
         invoiced: React.findDOMNode(@refs.invoiced).checked
-        project_id: parseInt(React.findDOMNode(@refs.projects_options_edit).value, 10)
+        project_id: @getProjectId(React.findDOMNode(@refs.projects_options_edit).value)
+        # project_id: parseInt(React.findDOMNode(@refs.projects_options_edit).value, 10)
       $.ajax
         method: 'PUT'
         url: "/entries/#{ @props.entry.id }"
@@ -57,6 +58,11 @@
         success: (data) =>
           @setState edit: false
           @props.handleEditEntry @props.entry, data
+  getProjectId: (value) ->
+    if value == ''
+      return null
+    else
+      parseInt(value, 10)
   handleChange: (e) ->
     # console.log(e)
   render: ->

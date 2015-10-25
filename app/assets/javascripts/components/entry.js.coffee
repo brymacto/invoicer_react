@@ -20,9 +20,10 @@
       .done @_fetchDataDone
       .fail @_fetchDataFail
   _fetchDataDone: (data, textStatus, jqXHR) ->
-    @setState
-      projectName: data.name
-      # project_id: @props.entry.project_id
+    if @state.projectName != data.name
+      @setState
+        projectName: data.name
+        # project_id: @props.entry.project_id
   _fetchDataFail: (xhr, status, err) ->
     @setState
       projectName: '*deleted project'

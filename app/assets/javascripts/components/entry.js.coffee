@@ -12,6 +12,8 @@
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
     if (@state.project_fail != true) && ((@state.project_id != null) && (@state.project_id != ''))
+      # @setState
+      #   project_fail: false
       $.ajax
         url: '/' + model + '/' + id
         dataType: 'json'
@@ -120,7 +122,7 @@
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null, 
-        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit', defaultValue: @state.project_id
+        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit', defaultValue: @props.entry.project_id
       React.DOM.td null,
         React.DOM.textarea
             className: 'form-control'

@@ -11,9 +11,11 @@
   componentDidUpdate: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
-    if (@state.project_fail != true) && ((@state.project_id != null) && (@state.project_id != ''))
+    # if (@state.project_fail != true)
+    # if (@state.project_fail != true) && ((@props.entry.project_id != null) && (@props.entry.project_id != ''))
       # @setState
       #   project_fail: false
+    if @props.entry.project_id != null
       $.ajax
         url: '/' + model + '/' + id
         dataType: 'json'
@@ -21,6 +23,10 @@
         data: data
       .done @_fetchDataDone
       .fail @_fetchDataFail
+    else
+      # @setState
+      #   projectName: 'None'
+      # Commented this out as it's causing infinite loop with componentDidUpdate
   _fetchDataDone: (data, textStatus, jqXHR) ->
     if @state.projectName != data.name
       @setState

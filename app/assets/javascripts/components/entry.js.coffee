@@ -24,8 +24,9 @@
       .done @_fetchDataDone
       .fail @_fetchDataFail
     else
-      # @setState
-      #   projectName: 'None'
+      if @state.projectName != 'None'
+        @setState
+          projectName: 'None'
       # Commented this out as it's causing infinite loop with componentDidUpdate
   _fetchDataDone: (data, textStatus, jqXHR) ->
     if @state.projectName != data.name

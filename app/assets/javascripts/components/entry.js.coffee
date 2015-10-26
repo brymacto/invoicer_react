@@ -5,16 +5,13 @@
     projectName: ''
     project_id: @props.entry.project_id
     projects: @props.projects
-    project_fail: false
+    tasks: @props.tasks
+    task_id: @props.entry.task_id
   componentDidMount: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   componentDidUpdate: ->
     @_fetchProjectName({}, 'projects', @props.entry.project_id)
   _fetchProjectName: (data, model, id)->
-    # if (@state.project_fail != true)
-    # if (@state.project_fail != true) && ((@props.entry.project_id != null) && (@props.entry.project_id != ''))
-      # @setState
-      #   project_fail: false
     if @props.entry.project_id != null
       $.ajax
         url: '/' + model + '/' + id
@@ -57,8 +54,8 @@
         rate: React.findDOMNode(@refs.rate).value
         notes: React.findDOMNode(@refs.notes).value
         invoiced: React.findDOMNode(@refs.invoiced).checked
-        project_id: @getProjectId(React.findDOMNode(@refs.projects_options_edit).value)
-        # project_id: parseInt(React.findDOMNode(@refs.projects_options_edit).value, 10)
+        project_id: @getProjectTaskId(React.findDOMNode(@refs.projects_options_edit).value)
+        task_id: @getProjectTaskId(React.findDOMNode(@refs.tasks_options_edit).value)
       $.ajax
         method: 'PUT'
         url: "/entries/#{ @props.entry.id }"
@@ -68,7 +65,7 @@
         success: (data) =>
           @setState edit: false
           @props.handleEditEntry @props.entry, data
-  getProjectId: (value) ->
+  getProjectTaskId: (value) ->
     if value == ''
       return null
     else
@@ -89,6 +86,7 @@
       React.DOM.td null, amountFormat(@props.entry.rate * (@props.entry.minutes / 60))
       React.DOM.td null, if @props.entry.invoiced == true then 'true' else ''
       React.DOM.td null, @state.projectName
+      React.DOM.td null, @state.taskName
       React.DOM.td null, truncString(@props.entry.notes)
       React.DOM.td null,
         React.DOM.a
@@ -129,7 +127,9 @@
           defaultChecked: @state.invoiced || @props.entry.invoiced
           ref: 'invoiced'
       React.DOM.td null, 
-        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit', defaultValue: @props.entry.project_id
+        React.createElement SelectBox, options: getSelectOptions(@state.projects), onChange: @handleChange, ref: 'projects_options_edit', defaultValue: @props.entry.project_id, label: 'project'
+      React.DOM.td null, 
+        React.createElement SelectBox, options: getSelectOptions(@state.tasks), onChange: @handleChange, ref: 'tasks_options_edit', defaultValue: @props.entry.task_id, label: 'task'
       React.DOM.td null,
         React.DOM.textarea
             className: 'form-control'
@@ -146,10 +146,11 @@
           onClick: @handleToggle
           'Cancel'
 
-  getSelectOptions = (projects) ->
-    select_projects = []
-    $.each projects, (index, project) ->
-      select_projects.push {value: project.id, label: project.name}
+  getSelectOptions = (entries) ->
+    select_options = []
+    $.each entries, (index, entry) ->
+      select_options.push {value: entry.id, label: entry.name}
       return null
-    return select_projects
+    return select_options
+
 

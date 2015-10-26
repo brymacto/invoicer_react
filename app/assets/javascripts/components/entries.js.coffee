@@ -2,6 +2,7 @@
     getInitialState: ->
       entries: @props.data
       projects: @props.projects
+      tasks: @props.tasks
       time: 0
       timerOn: false
       startTime: new Date
@@ -32,11 +33,12 @@
               React.DOM.th null, 'Total'
               React.DOM.th null, 'Invoiced'
               React.DOM.th null, 'Project'
+              React.DOM.th null, 'Task'
               React.DOM.th null, 'Notes'
               React.DOM.th null, 'Actions'
           React.DOM.tbody null,
             for entry in @state.entries
-              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry, handleEditEntry: @updateEntry, projects: @state.projects
+              React.createElement Entry, key: entry.id, entry: entry, handleDeleteEntry: @deleteEntry, handleEditEntry: @updateEntry, projects: @state.projects, tasks: @state.tasks
     updateEntry: (entry, data) ->
       index = @state.entries.indexOf entry
       entries = React.addons.update(@state.entries, { $splice: [[index, 1, data]] })

@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.all
     @projects = Project.all
+    @tasks = Task.all
   end
   def create
     @entry = Entry.new(entry_params)

@@ -42,7 +42,7 @@
     updateEntry: (entry, data) ->
       index = @state.entries.indexOf entry
       entries = React.addons.update(@state.entries, { $splice: [[index, 1, data]] })
-      @replaceState entries: entries
+      @setState entries: entries
 
     componentWillMount: ->
       @intervals = []
@@ -70,7 +70,7 @@
       entries = @state.entries.slice()
       index = entries.indexOf entry
       entries = React.addons.update(@state.entries, { $splice: [[index, 1]] })
-      @replaceState entries: entries
+      @setState entries: entries
 
     updateTimerText: (time) ->
       seconds = Math.floor(time / 1000) % 60
